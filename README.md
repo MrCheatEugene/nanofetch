@@ -1,6 +1,11 @@
 # sysinfo
 Sysinfo is a very simple CLI hardware info fetcher, written in C++. 
+![Image](https://github.com/MrCheatEugene/sysinfo/blob/master/image.jpg?raw=true)
 
+# Quick Start
+If you don't know how to build c++ code, then just download sysinfo.exe&libcpuid.dll or mysysinfo file and run it in terminal.
+
+Below is a guide for advanced users, who want to modify sysinfo.
 # How to build?
 
 1. Install G++ on Linux or TDM-GCC on Windows(and if you're on windows - install libcpuid, for linux - you don't need it - it is included already)
@@ -17,7 +22,7 @@ Compiler name: TDM-GCC 9.2.0 64-bit Release
 
 3. For Linux, compilation command is this:
 ```
-g++ file.cpp -o mysysinfo -I ./incl-libs/ -L ./incl-libs/ -lcpuid -w
+g++ sysinfo.cpp -o mysysinfo -I ./incl-libs/ -L ./incl-libs/ -lcpuid -w
 ```
 Incl-libs directory is avaliable in repository's main branch.
 
