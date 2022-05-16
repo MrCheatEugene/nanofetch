@@ -1,6 +1,6 @@
 # sysinfo
 Sysinfo is a very simple CLI hardware info fetcher, written in C++. 
-![Image](https://github.com/MrCheatEugene/sysinfo/blob/master/image.jpg?raw=true)
+![Image](https://github.com/MrCheatEugene/sysinfo/blob/main/image.jpg?raw=true)
 
 # Quick Start
 If you don't know how to build c++ code, then just download sysinfo.exe&libcpuid.dll or mysysinfo file and run it in terminal.
