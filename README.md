@@ -26,10 +26,11 @@ g++ sysinfo.cpp -o mysysinfo -I ./incl-libs/ -L ./incl-libs/ -lcpuid -w
 ```
 Incl-libs directory is avaliable in repository's main branch.
 
+Also, you need to install libcpuid library using APT/DPKG/Pacman. DPKG package is avaliable in repository's main branch.
 # How to use?
 
 Just run sysinfo.exe(the libcpuid.dll must be near sysinfo.exe) or ./mysysinfo.
-
+Also, you need to install libcpuid library (if you use Linux) using APT/DPKG/Pacman. DPKG package is avaliable in repository's main branch.
 # Supported Operating Systems
 SysInfo supports almost all linux distros and unix-based OS's. And also Windows.
 
