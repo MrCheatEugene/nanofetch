@@ -22,7 +22,7 @@ Compiler name: TDM-GCC 9.2.0 64-bit Release
 
 3. For Linux, compilation command is this:
 ```
-g++ sysinfo.cpp -o mysysinfo -I ./incl-libs/ -L ./incl-libs/ -lcpuid -w
+g++ sysinfo.cpp -o mysysinfo -I ./incl-libs/ -L ./incl-libs/ -lcpuid 
 ```
 Incl-libs directory is avaliable in repository's main branch.
 
