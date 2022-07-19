@@ -68,7 +68,7 @@ return std::string(value);
 					return -3;
 				}
 				printf("CPU: ");             // print out the CPU brand string
-				printf(data.brand_str);
+				printf("%s", data.brand_str);
 				printf("\n");
 			}
 			return 0;
@@ -147,7 +147,7 @@ std::string exec(const char* cmd) {
 					return -3;
 				}
 				printf("CPU: ");             // print out the CPU brand string
-				printf(data.brand_str);
+				printf("%s", data.brand_str);
 				printf("\n");
 			}
 		return 0;
@@ -192,7 +192,7 @@ std::string exec(const char* cmd) {
 					return -3;
 				}
 				printf("CPU: ");             // print out the CPU brand string
-				printf(data.brand_str);
+				printf("%s", data.brand_str);
 				printf("\n");
 			}
 			return 0;
@@ -271,7 +271,7 @@ std::string exec(const char* cmd) {
 					return -3;
 				}
 				printf("CPU: ");             // print out the CPU brand string
-				printf(data.brand_str);
+				printf("%s", data.brand_str);
 				printf("\n");
 			}
 		return 0;
@@ -349,9 +349,10 @@ std::string exec(const char* cmd) {
 					return -3;
 				}
 				printf("CPU: ");             // print out the CPU brand string
-				printf(data.brand_str);
+				printf("%s", data.brand_str);
 				printf("\n");
 			}
 		return 0;
 		}
 	#endif
+
