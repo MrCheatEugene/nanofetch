@@ -1,9 +1,9 @@
-# sysinfo
-Sysinfo is a very simple CLI hardware info fetcher, written in C++. 
-![Image](https://github.com/MrCheatEugene/sysinfo/blob/main/image.jpg?raw=true)
+# nanofetch
+Nanofetch is a very simple CLI hardware info fetcher, written in C++. 
+![Image](https://github.com/MrCheatEugene/nanofetch/blob/main/image.jpg?raw=true)
 
 # Quick Start
-If you don't know how to build c++ code, then just download sysinfo.exe&libcpuid.dll or mysysinfo file and run it in terminal.
+If you don't know how to build c++ code, then just download sysinfo.exe&libcpuid.dll or install DPKG file and run 'nanofetch' in terminal.
 
 Below is a guide for advanced users, who want to modify sysinfo.
 # How to build?
