@@ -3,7 +3,7 @@ Nanofetch is a very simple CLI hardware info fetcher, written in C++.
 ![Image](https://github.com/MrCheatEugene/nanofetch/blob/main/image.jpg?raw=true)
 
 # Quick Start
-If you don't know how to build c++ code, then just download sysinfo.exe&libcpuid.dll or install DPKG file and run 'nanofetch' in terminal.
+If you don't know how to build c++ code, then just download nanofetch.exe&libcpuid.dll from the main branch or install DPKG file and run 'nanofetch' in terminal.
 
 Below is a guide for advanced users, who want to modify sysinfo.
 # How to build?
