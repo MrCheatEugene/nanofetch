@@ -10,6 +10,8 @@
 #include <string>
 #include <stdexcept>
 #include <cmath>
+#include <vector>
+#include <algorithm>
 
 #ifdef _WIN32
 
@@ -35,22 +37,53 @@ std::string GetWindowsName() {
 #include <unistd.h>
 #include <sys/sysinfo.h>
 #include <sys/utsname.h>
+#include <dirent.h>
 
-std::string exec(const char* cmd) {
-    char buffer[128];
-    std::string result = "";
-    FILE* pipe = popen(cmd, "r");
-    if (!pipe) throw std::runtime_error("popen() failed!");
-    try {
-        while (fgets(buffer, sizeof buffer, pipe) != NULL) {
-            result += buffer;
+std::string get_os_name() {
+    std::vector<std::string> names;
+
+    DIR* dir = opendir("/etc");
+    if (!dir) return "";
+
+    struct dirent* entry;
+    while ((entry = readdir(dir)) != nullptr) {
+        std::string filename = entry->d_name;
+        if (filename.size() >= 8 && std::strcmp(filename.substr(filename.size() - 8).c_str(), "-release") == 0) {
+            std::ifstream in("/etc/" + filename);
+            std::string line;
+            while (std::getline(in, line)) {
+                if (line.size() >= 12 && line.compare(0, 12, "PRETTY_NAME=") == 0) {
+                    auto val = line.substr(13);
+                    if (!val.empty() && val.front() == '"') val.erase(0, 1);
+                    if (!val.empty() && val.back() == '"') val.pop_back();
+                    names.push_back(val);
+                }
+            }
         }
-    } catch (...) {
-        pclose(pipe);
-        throw;
     }
-    pclose(pipe);
+
+    closedir(dir);
+    std::reverse(names.begin(), names.end());
+
+    std::string result;
+    for (const auto& name : names)
+        result += name + ' ';
+    if (!result.empty()) result.pop_back();
+
     return result;
+}
+
+std::string getCpuModel() {
+    std::ifstream cpuinfo("/proc/cpuinfo");
+    std::string line;
+    while (std::getline(cpuinfo, line)) {
+        if (line.substr(0, 10) == "model name" || line.substr(0, 9) == "cpu model") {
+            size_t colon = line.find(':');
+            if (colon != std::string::npos)
+                return line.substr(colon + 2); // Skip ": "
+        }
+    }
+    return "Unknown CPU";
 }
 #endif
 
@@ -82,8 +115,7 @@ int main() {
         total_ram = std::to_string((float)statex.ullTotalPhys / pow(1024,3))+" GiB";
         free_ram = std::to_string((float)statex.ullAvailPhys / pow(1024,3))+" GiB";
     #else
-        os_name = exec("cat /etc/*-release | egrep 'PRETTY_NAME' | cut -d = -f 2 "
-                    "| tr -d '\"' | tac | tr '\n' ' '");
+        os_name = get_os_name();
         char hostname[HOST_NAME_MAX + 1];
         gethostname(hostname, HOST_NAME_MAX + 1);
         hostnamestr = hostname; 
@@ -108,6 +140,11 @@ int main() {
         }
         cpu = data.brand_str;
     }
+    #ifndef _WIN32
+    else{
+        cpu = getCpuModel();
+    }
+    #endif
 
     std::cout << "OS Type: "+ostypestring+"\nOS Name: "+os_name+"\nHostname: "+hostnamestr+"\nTotal RAM: "+total_ram+"\nTotal Free RAM: "+free_ram+"\nCPU: "+cpu+"\n";
     return 0;
