@@ -9,6 +9,7 @@
 #include <limits.h>
 #include <string>
 #include <stdexcept>
+#include <cmath>
 
 #ifdef _WIN32
 
@@ -78,8 +79,8 @@ int main() {
         MEMORYSTATUSEX statex;
         statex.dwLength = sizeof(statex);
         GlobalMemoryStatusEx(&statex);
-        total_ram = std::to_string((float)statex.ullTotalPhys / (1024**3))+" GiB";
-        free_ram = std::to_string((float)statex.ullAvailPhys / (1024**3))+" GiB";
+        total_ram = std::to_string((float)statex.ullTotalPhys / pow(1024,3))+" GiB";
+        free_ram = std::to_string((float)statex.ullAvailPhys / pow(1024,3))+" GiB";
     #else
         os_name = exec("cat /etc/*-release | egrep 'PRETTY_NAME' | cut -d = -f 2 "
                     "| tr -d '\"' | tac | tr '\n' ' '");
@@ -88,8 +89,8 @@ int main() {
         hostnamestr = hostname; 
         struct sysinfo si;
         sysinfo(&si);
-        total_ram = std::to_string((float)si.totalram / 1024**3)+" GiB";
-        free_ram = std::to_string((float)si.freeram / 1024**3)+" GiB";
+        total_ram = std::to_string((float)si.totalram / pow(1024,3))+" GiB";
+        free_ram = std::to_string((float)si.freeram / pow(1024,3))+" GiB";
     #endif
 
     if (cpuid_present()) {
