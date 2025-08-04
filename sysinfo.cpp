@@ -16,9 +16,9 @@
 #ifdef _WIN32
 
 #define os_type 0
-#include <lm.h>
-#include <sysinfoapi.h>
 #include <windows.h>
+#include <sysinfoapi.h>
+#include <lm.h>
 std::string GetWindowsName() {
     DWORD dwType = REG_SZ;
     HKEY hKey = 0;
